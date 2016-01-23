@@ -67,15 +67,15 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	//action
-	function changeAction() {
+	function changeText() {
 	    return {
-	        type: 'CHANGE'
+	        type: 'CHANGE_TEXT'
 	    };
 	}
 
-	function buttonAction() {
+	function buttonClick() {
 	    return {
-	        type: 'CHANGE'
+	        type: 'BUTTON_CLICK'
 	    };
 	}
 
@@ -88,9 +88,13 @@
 	    var action = arguments[1];
 
 	    switch (action.type) {
-	        case 'CHANGE':
+	        case 'CHANGE_TEXT':
 	            return {
 	                text: state.text == 'Hello' ? 'Stark' : 'Hello'
+	            };
+	        case 'BUTTON_CLICK':
+	            return {
+	                text: 'You just click button'
 	            };
 	        default:
 	            return {
@@ -117,12 +121,11 @@
 	    _createClass(Hello, [{
 	        key: 'handleClick',
 	        value: function handleClick() {
-	            this.props.actions.changeAction();
+	            this.props.actions.changeText();
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var text = this.props.text;
 	            return _react2.default.createElement(
 	                'h1',
 	                { onClick: this.handleClick },
@@ -151,7 +154,7 @@
 	    _createClass(Change, [{
 	        key: 'handleClick',
 	        value: function handleClick() {
-	            this.props.actions.buttonAction();
+	            this.props.actions.buttonClick();
 	        }
 	    }, {
 	        key: 'render',
@@ -183,7 +186,6 @@
 	            var actions = _props.actions;
 	            var text = _props.text;
 
-	            console.log(this.props);
 	            return _react2.default.createElement(
 	                'div',
 	                null,
@@ -202,7 +204,7 @@
 
 	function mapDispatchToProps(dispatch) {
 	    return {
-	        actions: (0, _redux.bindActionCreators)({ changeAction: changeAction, buttonAction: buttonAction }, dispatch)
+	        actions: (0, _redux.bindActionCreators)({ changeText: changeText, buttonClick: buttonClick }, dispatch)
 	    };
 	}
 

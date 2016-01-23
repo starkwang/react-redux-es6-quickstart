@@ -4,15 +4,15 @@ import { createStore,bindActionCreators } from 'redux';
 import { Provider ,connect} from 'react-redux';
 
 //action
-function changeAction(){
+function changeText(){
     return {
-        type:'CHANGE'
+        type:'CHANGE_TEXT'
     }
 }
 
-function buttonAction(){
+function buttonClick(){
     return {
-        type:'CHANGE'
+        type:'BUTTON_CLICK'
     }
 }
 
@@ -21,16 +21,20 @@ const initialState = {
     text: 'Hello'
 }
 function todoApp(state = initialState, action) {
-  switch (action.type) {
-    case 'CHANGE':
-      return {
-        text:state.text=='Hello'?'Stark':'Hello'
-      }
-    default:
-      return {
-        text:'Hello'
-    };
-  }
+    switch (action.type) {
+        case 'CHANGE_TEXT':
+            return {
+                text:state.text=='Hello'?'Stark':'Hello'
+            }
+        case 'BUTTON_CLICK':
+            return {
+                text: 'You just click button'
+            }
+        default:
+          return {
+            text:'Hello'
+        };
+    }
 }
 
 //store
@@ -44,11 +48,10 @@ class Hello extends React.Component{
     }
 
     handleClick(){
-        this.props.actions.changeAction();
+        this.props.actions.changeText();
     }
 
     render() {
-        var text = this.props.text;
         return (
             <h1 onClick={this.handleClick}> {this.props.text} </h1>
         );
@@ -62,7 +65,7 @@ class Change extends React.Component{
     }
 
     handleClick(){
-        this.props.actions.buttonAction();
+        this.props.actions.buttonClick();
     }
 
     render() {
@@ -79,8 +82,7 @@ class App extends React.Component{
     }
 
     render() {
-        var { actions, text} = this.props;
-        console.log(this.props);
+        const { actions, text} = this.props;
         return (
             <div>
                 <Hello actions={actions} text={text}/>
@@ -96,7 +98,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
     return{
-        actions : bindActionCreators({changeAction:changeAction,buttonAction:buttonAction},dispatch)
+        actions : bindActionCreators({changeText:changeText,buttonClick:buttonClick},dispatch)
     }
 }
 
