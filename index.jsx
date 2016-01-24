@@ -20,7 +20,7 @@ function buttonClick(){
 const initialState = {
     text: 'Hello'
 }
-function todoApp(state = initialState, action) {
+function myApp(state = initialState, action) {
     switch (action.type) {
         case 'CHANGE_TEXT':
             return {
@@ -38,7 +38,7 @@ function todoApp(state = initialState, action) {
 }
 
 //store
-let store = createStore(todoApp);
+let store = createStore(myApp);
 
 
 class Hello extends React.Component{
