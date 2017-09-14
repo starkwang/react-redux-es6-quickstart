@@ -39,7 +39,7 @@ mkdir redux-test && cd redux-test
 ```js
 // webpack.config.js
 module.exports = {
-    entry: 'index.jsx',
+    entry: './index.jsx',
     output: {
         filename: 'bundle.js'
     },
